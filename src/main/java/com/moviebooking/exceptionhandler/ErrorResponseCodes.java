@@ -1,0 +1,37 @@
+package com.moviebooking.exceptionhandler;
+
+
+public enum ErrorResponseCodes 
+{
+	  MAX_SEATS("001", "Maximum 6 seats can be blocked"),
+	  MAX_SEATS_SHOW("002", "Maximum 6 seats can be blocked per show"),
+	  INVALID_SEAT("003", "Invalid seat selection"),
+	  DUPLICATE_SESSION("004", "Duplicate session"),
+	  BLOCKED_SEAT("005", "Requested seats are blocked"),
+	  USER_EXISTS("006", "This user already exists"),
+	  SERVER_ERROR("007", "Unexpected server error"),
+	  PAYMENT_FAILED("008", "Payment failed"),
+	  SUCCESS("009","ok"),
+	  SEATS_NA("010", "Requested seats are not available");
+	
+	  private final String errorCode;
+	  private final String errorMessage;
+
+	  private ErrorResponseCodes(String errorCode, String errorMessage) {
+	    this.errorCode = errorCode;
+	    this.errorMessage = errorMessage;
+	  }
+
+	  public String getErrorMessage() {
+	     return errorMessage;
+	  }
+
+	  public String getErrorCode() {
+	     return errorCode;
+	  }
+
+	  @Override
+	  public String toString() {
+	    return errorCode + ": " + errorMessage;
+	  }
+}
