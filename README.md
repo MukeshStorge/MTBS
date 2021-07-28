@@ -45,7 +45,8 @@
 <!-- HLD -->
 ## HLD
 
-![image](https://user-images.githubusercontent.com/65528044/127330996-8efac0ef-16d2-4aed-8e2a-410bee1b9b71.png)
+![image](https://user-images.githubusercontent.com/65528044/127392255-7f46acd8-f4fa-4752-9eae-5ca3f83b492f.png)
+
 
 
 <!-- LLD -->
