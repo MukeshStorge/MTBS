@@ -119,7 +119,7 @@ public class ReservationService {
 		}
 
 		errorResponse = reservationService.bookSeats(bookingModel);
-		return "ok".equals(errorResponse.toString())
+		return "Success".equals(errorResponse.getErrorMessage())
 				? ResponseEntity.ok().body(new Ticket(bookingModel.getSeatIds()))
 				: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse.toString());
 	}
