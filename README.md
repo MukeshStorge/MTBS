@@ -52,6 +52,8 @@
 <!-- LLD -->
 ## LLD
 
+![image](https://user-images.githubusercontent.com/65528044/127528231-95e773dc-22e9-4316-beae-d9850779be36.png)
+
 
 ## API Endpoints and Docs
 
