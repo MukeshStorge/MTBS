@@ -17,10 +17,10 @@ public class BookingRedisRepositoryImpl implements BookingRedisRepository {
 	private String bucketName; 
 	
 	@SuppressWarnings("unused")
-	private RedisTemplate<Long, BookingRedisParent> redisTemplate;
+	private RedisTemplate<String, BookingRedisParent> redisTemplate;
     private HashOperations hashOperations; 
     
-    public BookingRedisRepositoryImpl(RedisTemplate<Long, BookingRedisParent> redisTemplate) {
+    public BookingRedisRepositoryImpl(RedisTemplate<String, BookingRedisParent> redisTemplate) {
         this.redisTemplate = redisTemplate;
         hashOperations = redisTemplate.opsForHash();
     }
@@ -31,11 +31,11 @@ public class BookingRedisRepositoryImpl implements BookingRedisRepository {
         return booking; 
     }
 	@Override
-    public BookingRedisParent findById(Long bucketId) {
-        return (BookingRedisParent)hashOperations.get(bucketName,bucketId);
+    public BookingRedisParent findById(String id) {
+        return (BookingRedisParent)hashOperations.get(bucketName,id);
     }
 	@Override
-    public Map<Long,BookingRedisParent> findAll() {
+    public Map<String,BookingRedisParent> findAll() {
     	return hashOperations.entries(bucketName);
     }
 }

@@ -18,11 +18,11 @@ public class BookingRedisParent implements Serializable {
 	 * @param bookingModel
 	 */
 	public BookingRedisParent(BookingModel bookingModel) { 
-		this.id = bookingModel.getTheaterId() + bookingModel.getScreenId() + bookingModel.getBranchId()
-				+ new Timestamp(System.currentTimeMillis()).getTime();
+		this.id = new StringBuffer().append(bookingModel.getTheaterId()).append(bookingModel.getScreenId()).append(bookingModel.getBranchId())
+				.append(new Timestamp(System.currentTimeMillis()).getTime())+"";
 	}
 
-	Long id;
+	String id;
 	
 	List<BookingRedisChild> bookingRedisChild = new ArrayList<>();
 }

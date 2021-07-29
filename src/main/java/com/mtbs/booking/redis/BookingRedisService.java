@@ -23,7 +23,7 @@ public class BookingRedisService {
 	private BookingRedisRepository bookingRedisRepository;
 
 
-	public Map<Long, BookingRedisParent> findAll() {
+	public Map<String, BookingRedisParent> findAll() {
 		return bookingRedisRepository.findAll();
 	}
 

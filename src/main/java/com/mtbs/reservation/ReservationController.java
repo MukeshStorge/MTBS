@@ -61,7 +61,7 @@ public class ReservationController {
 	}
 
 	@GetMapping
-	public Map<Long, BookingRedisParent> findAll() {
+	public Map<String, BookingRedisParent> findAll() {
 		return bookingRedisService.findAll();
 	}
 

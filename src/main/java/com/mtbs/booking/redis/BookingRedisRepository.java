@@ -9,8 +9,8 @@ public interface BookingRedisRepository
 	
 	BookingRedisParent save(BookingRedisParent booking);
 
-	BookingRedisParent findById(Long bucketId);
+	BookingRedisParent findById(String id);
 
-	Map<Long, BookingRedisParent> findAll();
+	Map<String, BookingRedisParent> findAll();
 
 }
