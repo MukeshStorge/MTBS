@@ -1,60 +1,98 @@
--- DROP SCHEMA movie_booking;
+-- DROP SCHEMA mtbs;
 
-CREATE SCHEMA IF NOT EXISTS movie_booking AUTHORIZATION postgres;
+CREATE SCHEMA IF NOT EXISTS mtbs AUTHORIZATION postgres;
 
--- movie_booking.booking_request definition
+
+-- mtbs.theater definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.booking_request;
+-- DROP TABLE mtbs.theater;
 
-CREATE TABLE IF NOT EXISTS movie_booking.booking_request (
-	correlation_id varchar NOT NULL,
-	processed bool NOT NULL DEFAULT false,
-	"data" varchar NOT NULL,
-	request_time_millisec int8 NOT NULL DEFAULT (date_part('epoch'::text, now()) * 1000::double precision),
-	CONSTRAINT request_log_pk PRIMARY KEY (correlation_id)
+CREATE TABLE IF NOT EXISTS mtbs.theater (
+	id int8 NOT NULL,
+	"name" varchar NULL,
+	contact_number varchar NULL,
+	address varchar NULL,
+	pin_code varchar NULL,
+	CONSTRAINT theater_pk PRIMARY KEY (id)
 );
 
 
--- movie_booking.movie definition
+-- Drop table
+
+-- DROP TABLE mtbs.branch;
+
+CREATE TABLE IF NOT EXISTS mtbs.branch (
+	id int8 NOT NULL,
+	"name" varchar NULL,
+	theater_id int8 NULL,
+	contact_number varchar NULL,
+	address varchar NULL,
+	pin_code varchar NULL,
+	CONSTRAINT branch_pk PRIMARY KEY (id),
+	CONSTRAINT branch_fk FOREIGN KEY (id) REFERENCES mtbs.theater(id)
+);
+
+
+-- mtbs.screens definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.movie;
+-- DROP TABLE mtbs.screens;
 
-CREATE TABLE IF NOT EXISTS movie_booking.movie (
+CREATE TABLE IF NOT EXISTS mtbs.screens (
+	id int8 NOT NULL,
+	"name" varchar NOT NULL,
+	branch_id int8 NULL,
+	capacity int8 NULL,
+	"size" varchar NULL,
+	status varchar NULL,
+	CONSTRAINT screens_pk PRIMARY KEY (id),
+	CONSTRAINT screens_un UNIQUE (name),
+	CONSTRAINT screens_fk FOREIGN KEY (branch_id) REFERENCES mtbs.branch(id)
+);
+
+
+
+-- mtbs.movies definition
+
+-- Drop table
+
+-- DROP TABLE mtbs.movies;
+
+CREATE TABLE IF NOT EXISTS mtbs.movies (
 	id int8 NOT NULL,
 	"name" varchar NOT NULL,
 	running_time_hour float4 NOT NULL,
 	"language" varchar NOT NULL,
-	CONSTRAINT movie_pk PRIMARY KEY (id),
-	CONSTRAINT movie_un UNIQUE (name, language)
+	CONSTRAINT movies_pk PRIMARY KEY (id),
+	CONSTRAINT movies_un UNIQUE (name, language)
 );
 
 
--- movie_booking.movie_hall definition
+-- mtbs.screens definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.movie_hall;
+-- DROP TABLE mtbs.screens;
 
-CREATE TABLE IF NOT EXISTS movie_booking.movie_hall (
+CREATE TABLE IF NOT EXISTS mtbs.screens (
 	id int8 NOT NULL,
 	"name" varchar NOT NULL,
 	address varchar NOT NULL,
-	CONSTRAINT movie_hall_pk PRIMARY KEY (id),
-	CONSTRAINT movie_hall_un UNIQUE (name)
+	CONSTRAINT screens_pk PRIMARY KEY (id),
+	CONSTRAINT screens_un UNIQUE (name)
 );
 
 
--- movie_booking."user" definition
+-- mtbs."user" definition
 
 -- Drop table
 
--- DROP TABLE movie_booking."user";
+-- DROP TABLE mtbs."user";
 
-CREATE TABLE IF NOT EXISTS movie_booking."user" (
+CREATE TABLE IF NOT EXISTS mtbs."user" (
 	id int8 NOT NULL,
 	first_name varchar NOT NULL,
 	last_name varchar,
@@ -65,97 +103,97 @@ CREATE TABLE IF NOT EXISTS movie_booking."user" (
 );
 
 
--- movie_booking.seat definition
+-- mtbs.seat definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.seat;
+-- DROP TABLE mtbs.seat;
 
-CREATE TABLE IF NOT EXISTS movie_booking.seat (
+CREATE TABLE IF NOT EXISTS mtbs.seat (
 	id int8 NOT NULL,
 	"number" int4 NOT NULL,
-	movie_hall_id int8 NOT NULL,
+	screens_id int8 NOT NULL,
 	"row" int4 NOT NULL,
-	CONSTRAINT pk_movie_hall_seats_id PRIMARY KEY (id),
-	CONSTRAINT fk_movie_hall_seats_movie_hall FOREIGN KEY (movie_hall_id) REFERENCES movie_booking.movie_hall(id)
+	CONSTRAINT pk_screens_seats_id PRIMARY KEY (id),
+	CONSTRAINT fk_screens_seats_screens FOREIGN KEY (screens_id) REFERENCES mtbs.screens(id)
 );
 
 
--- movie_booking."show" definition
+-- mtbs."show" definition
 
 -- Drop table
 
--- DROP TABLE movie_booking."show";
+-- DROP TABLE mtbs."show";
 
-CREATE TABLE IF NOT EXISTS movie_booking."show" (
+CREATE TABLE IF NOT EXISTS mtbs."show" (
 	id int8 NOT NULL,
 	movie_id int8 NOT NULL,
-	movie_hall_id int8 NOT NULL,
+	screens_id int8 NOT NULL,
 	start_time timestamp(0) NOT NULL,
 	end_time timestamp(0) NOT NULL,
 	CONSTRAINT movie_show_pk PRIMARY KEY (id),
-	CONSTRAINT movie_show_un UNIQUE (movie_hall_id, movie_id, start_time, end_time),
-	CONSTRAINT movie_show_fk FOREIGN KEY (movie_hall_id) REFERENCES movie_booking.movie_hall(id),
-	CONSTRAINT movie_show_fk_1 FOREIGN KEY (movie_id) REFERENCES movie_booking.movie(id)
+	CONSTRAINT movie_show_un UNIQUE (screens_id, movie_id, start_time, end_time),
+	CONSTRAINT movie_show_fk FOREIGN KEY (screens_id) REFERENCES mtbs.screens(id),
+	CONSTRAINT movie_show_fk_1 FOREIGN KEY (movie_id) REFERENCES mtbs.movies(id)
 );
 
 
--- movie_booking.show_seat definition
+-- mtbs.shows_seat definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.show_seat;
+-- DROP TABLE mtbs.shows_seat;
 
-CREATE TABLE IF NOT EXISTS movie_booking.show_seat (
+CREATE TABLE IF NOT EXISTS mtbs.shows_seat (
 	id int8 NOT NULL,
 	show_id int8 NOT NULL,
 	price numeric(7,2) NOT NULL,
 	seat_id int8 NOT NULL,
 	CONSTRAINT seat_pk PRIMARY KEY (id),
 	CONSTRAINT unq_show_seat UNIQUE (show_id, seat_id),
-	CONSTRAINT fk_seat_show FOREIGN KEY (show_id) REFERENCES movie_booking.show(id),
-	CONSTRAINT fk_show_seat_id FOREIGN KEY (seat_id) REFERENCES movie_booking.seat(id)
+	CONSTRAINT fk_seat_show FOREIGN KEY (show_id) REFERENCES mtbs.show(id),
+	CONSTRAINT fk_show_seat_id FOREIGN KEY (seat_id) REFERENCES mtbs.seat(id)
 );
 
 
--- movie_booking.blocked_seat definition
+-- mtbs.blocked_seat definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.blocked_seat;
+-- DROP TABLE mtbs.blocked_seat;
 
-CREATE TABLE IF NOT EXISTS movie_booking.blocked_seat (
+CREATE TABLE IF NOT EXISTS mtbs.blocked_seat (
 	id int8 NOT NULL,
 	user_id int8 NOT NULL,
 	show_seat_id int8 NOT NULL,
 	blocked_time timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT blocked_seat_pk PRIMARY KEY (id),
 	CONSTRAINT unq_blocked_seats UNIQUE (user_id, show_seat_id),
-	CONSTRAINT fk_blocked_seats_seat FOREIGN KEY (show_seat_id) REFERENCES movie_booking.show_seat(id),
-	CONSTRAINT fk_blocked_seats_user FOREIGN KEY (user_id) REFERENCES movie_booking."user"(id)
+	CONSTRAINT fk_blocked_seats_seat FOREIGN KEY (show_seat_id) REFERENCES mtbs.shows_seat(id),
+	CONSTRAINT fk_blocked_seats_user FOREIGN KEY (user_id) REFERENCES mtbs."user"(id)
 );
 
 
--- movie_booking.booked_seat definition
+-- mtbs.booked_seat definition
 
 -- Drop table
 
--- DROP TABLE movie_booking.booked_seat;
+-- DROP TABLE mtbs.booked_seat;
 
-CREATE TABLE IF NOT EXISTS movie_booking.booked_seat (
+CREATE TABLE IF NOT EXISTS mtbs.booked_seat (
 	id int8 NOT NULL,
 	user_id int8 NOT NULL,
 	show_seat_id int8 NOT NULL,
 	booked_time timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT booking_pk PRIMARY KEY (id),
 	CONSTRAINT unq_reserved_seats UNIQUE (user_id, show_seat_id),
-	CONSTRAINT fk_reserved_seats_seat FOREIGN KEY (show_seat_id) REFERENCES movie_booking.show_seat(id),
-	CONSTRAINT reserved_seats_fk FOREIGN KEY (user_id) REFERENCES movie_booking."user"(id)
+	CONSTRAINT fk_reserved_seats_seat FOREIGN KEY (show_seat_id) REFERENCES mtbs.shows_seat(id),
+	CONSTRAINT reserved_seats_fk FOREIGN KEY (user_id) REFERENCES mtbs."user"(id)
 );
 
--- movie_booking.seat_availability source
+-- mtbs.seat_availability source
 
-CREATE OR REPLACE VIEW movie_booking.seat_availability
+CREATE OR REPLACE VIEW mtbs.seat_availability
 AS SELECT s.id,
     s.show_id,
     s.price,
@@ -164,19 +202,29 @@ AS SELECT s.id,
             WHEN bl.id IS NOT NULL OR bk.id IS NOT NULL THEN 'false'::text
             ELSE 'true'::text
         END AS available
-   FROM movie_booking.show_seat s
-     LEFT JOIN movie_booking.blocked_seat bl ON bl.show_seat_id = s.id
-     LEFT JOIN movie_booking.booked_seat bk ON bk.show_seat_id = s.id;
+   FROM mtbs.shows_seat s
+     LEFT JOIN mtbs.blocked_seat bl ON bl.show_seat_id = s.id
+     LEFT JOIN mtbs.booked_seat bk ON bk.show_seat_id = s.id;
     
--- movie_booking.hibernate_sequence definition
+-- mtbs.hibernate_sequence definition
 
--- DROP SEQUENCE movie_booking.hibernate_sequence;
 
-CREATE SEQUENCE IF NOT EXISTS movie_booking.hibernate_sequence
+-- Remove blocked timedout records
+
+CREATE OR REPLACE FUNCTION mtbs.remove_timedout_records()
+ RETURNS integer
+AS 'BEGIN
+		DELETE FROM mtbs.blocked_seat WHERE blocked_time < now() - INTERVAL ''2 minutes'';
+		return 1;
+	END;'
+LANGUAGE plpgsql;
+
+-- DROP SEQUENCE mtbs.hibernate_sequence;
+
+CREATE SEQUENCE IF NOT EXISTS mtbs.hibernate_sequence
 	INCREMENT BY 1
 	MINVALUE 1
 	MAXVALUE 9223372036854775807
 	START 1
 	CACHE 1
 	NO CYCLE;    
-

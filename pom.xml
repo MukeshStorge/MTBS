@@ -9,11 +9,11 @@
 		<version>2.4.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.moviebooking</groupId>
-	<artifactId>moviebooking</artifactId>
+	<groupId>com.mtbs</groupId>
+	<artifactId>mtbs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>web</name>
-	<description>Movie ticket booking app</description>
+	<description>Movie ticket booking system</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
