@@ -33,19 +33,21 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-**Movie ticket booking system with below features**
+**Movie ticket booking system with below features,**
 
 ![image](https://user-images.githubusercontent.com/65528044/127213353-debc698f-3e14-4f8c-a606-2e35c436e015.png)
 
 
 ### Tech Stack
 
-* Java 8
-* Spring Boot 2.4.5
-* Lombok
-* OpenAPI
-* Redis 
-* Postgresql
+* **Java 8** (Pre-Install)
+* **Redis**  (Pre-Install)
+* **Maven** (Pre-Install)
+* **Postgresql**  (Pre-Install)
+* **Spring Boot 2.4.5**
+* **Lombok**
+* **OpenAPI**
+
 
 <!-- HLD -->
 ## HLD
@@ -63,7 +65,7 @@ Below selected Redis ID is a combination of TheaterId+ShowId+ScreenId+SeatId+Tim
 
 ![image](https://user-images.githubusercontent.com/65528044/127560617-026402de-c518-4b7b-aabc-5f2e14736195.png)
 
-### ER Diagram
+### ER-Diagram
 
 ![image](https://user-images.githubusercontent.com/65528044/127528231-95e773dc-22e9-4316-beae-d9850779be36.png)
 
@@ -74,7 +76,7 @@ Below selected Redis ID is a combination of TheaterId+ShowId+ScreenId+SeatId+Tim
 * Sample Data added for Users, Theaters, Branches, Screens, Shows, Seats, Movies !!!. Refer:  [Data.sql][data] 
 * To change DB config/App port/Max seat size/Log path/Redis port/bucket. Refer: [Application.properties][application] 
 * Use Swagger Ui http://localhost:8081/swagger-ui.html to access APIs.
-* Module based package grouping done for readablity.
+* Module based package [grouping][group] done for readablity.
 * Start with [ReservationController.java][reservationcontroller] for ticket booking logic.
 
 
@@ -121,3 +123,4 @@ Distributed under the MIT License. See [LICENSE][license-url] for more informati
 [application]: https://github.com/MukeshStorge/MTBS/blob/main/src/main/resources/application.properties
 [reservationcontroller]: https://github.com/MukeshStorge/MTBS/blob/main/src/main/java/com/mtbs/reservation/ReservationController.java
 [redisconf]: https://github.com/MukeshStorge/MTBS/blob/main/src/main/java/com/mtbs/configs/RedisConfig.java
+[group]: https://github.com/MukeshStorge/MTBS/tree/main/src/main/java/com/mtbs
