@@ -27,12 +27,12 @@ public class BookingRedisRepositoryImpl implements BookingRedisRepository {
 	
 	@Override
     public BookingRedisParent save(BookingRedisParent booking) {
-		hashOperations.put(bucketName,booking.getTimeStamp(),booking);
+		hashOperations.put(bucketName,booking.getId(),booking);
         return booking; 
     }
 	@Override
-    public BookingRedisParent findById(Long timestamp) {
-        return (BookingRedisParent)hashOperations.get(bucketName,timestamp);
+    public BookingRedisParent findById(Long bucketId) {
+        return (BookingRedisParent)hashOperations.get(bucketName,bucketId);
     }
 	@Override
     public Map<Long,BookingRedisParent> findAll() {

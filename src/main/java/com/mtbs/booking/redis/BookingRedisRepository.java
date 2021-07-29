@@ -9,7 +9,7 @@ public interface BookingRedisRepository
 	
 	BookingRedisParent save(BookingRedisParent booking);
 
-	BookingRedisParent findById(Long timestamp);
+	BookingRedisParent findById(Long bucketId);
 
 	Map<Long, BookingRedisParent> findAll();
 

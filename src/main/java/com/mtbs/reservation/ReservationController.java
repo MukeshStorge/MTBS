@@ -44,7 +44,8 @@ public class ReservationController {
 			if (bookingModel != null && bookingModel.getSeatIds().size() > maxSeatsAllowed)
 				return ResponseEntity.badRequest().body(ErrorResponseCodes.MAX_SEATS.toString());
 
-			BookingRedisParent requestMessage = new BookingRedisParent();
+			BookingRedisParent requestMessage = new BookingRedisParent(bookingModel);
+			
 			String correlationId = UUID.randomUUID().toString();
 			requestMessage = bookingRedisService.pushToRedis(bookingModel, requestMessage, correlationId);
 

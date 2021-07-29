@@ -29,7 +29,7 @@ public class BookingRedisService {
 
 	public BookingRedisParent pushToRedis(BookingModel bookingModel, BookingRedisParent requestMessage,
 			String correlationId) throws JsonProcessingException {
-		BookingRedisParent concurrentObj = bookingRedisRepository.findById(requestMessage.getTimeStamp());
+		BookingRedisParent concurrentObj = bookingRedisRepository.findById(requestMessage.getId());
 		List<BookingRedisChild> bookingRequestList = concurrentObj == null ? new ArrayList<BookingRedisChild>()
 				: concurrentObj.getBookingRedisChild();
 		BookingRedisChild request = new BookingRedisChild();

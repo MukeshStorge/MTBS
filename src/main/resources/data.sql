@@ -1,11 +1,11 @@
---theater
+-- Theater
 
 INSERT INTO mtbs.theater
 (id, "name", contact_number, address, pin_code)
 VALUES(1, 'Sathyam Cinemas Main', '8765432190', 'Chennai', '6000987') ON CONFLICT DO NOTHING;
 
 
---branch
+-- Branch
 
 INSERT INTO mtbs.branch
 (id, "name", theater_id, contact_number, address, pin_code)
@@ -22,9 +22,9 @@ INSERT INTO mtbs."user"
 VALUES(2, 'Sachin', 'Tendulkar', 'sachin@gmail.com', true) ON CONFLICT DO NOTHING;
 INSERT INTO mtbs."user"
 (id, first_name, last_name, email, active_status)
-VALUES(3, 'Dravid', 'Dev', 'dravid@gmail.com', true) ON CONFLICT DO NOTHING;
+VALUES(3, 'Dravid', 'Dev', 'dravid@gmail.com', true) ON CONFLICT DO NOTHING;	
 
---Movies
+-- Movies
 
 INSERT INTO mtbs.movies
 (id, "name", running_time_hour, "language")
@@ -42,7 +42,7 @@ INSERT INTO mtbs.movies
 (id, "name", running_time_hour, "language")
 VALUES(4, 'Soul', 3.0, 'English') ON CONFLICT DO NOTHING;
 
---Screens
+-- Screens
 
 INSERT INTO mtbs.screens
 (id, "name", branch_id, capacity, "size", status)
@@ -109,7 +109,7 @@ INSERT INTO mtbs."show"
 (id, movie_id, screens_id, start_time, end_time)
 VALUES(1009, 5, 3, '2008-11-07 22:51:48.000', '2008-07-01 09:32:49.000') ON CONFLICT DO NOTHING;
 
---Seats
+-- Seats
 
 INSERT INTO mtbs.seat
 (id, "number", screens_id, "row")
