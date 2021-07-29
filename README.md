@@ -17,6 +17,9 @@
       <a href="#lld">LLD - Low Level Design</a>
     </li>
      <li>
+      <a href="#how-it-works">How it works?</a>
+    </li>
+     <li>
       <a href="#api-endpoints-and-docs">API Endpoints and Docs</a>
     </li>
     <li><a href="#license">License</a></li>
@@ -45,7 +48,8 @@
 <!-- HLD -->
 ## HLD
 
-![image](https://user-images.githubusercontent.com/65528044/127393384-1e31e867-f8a5-4fa2-944b-b7d0c29f4d33.png)
+![image](https://user-images.githubusercontent.com/65528044/127534456-7729a3aa-6936-486d-84ed-5af1b8c2fa70.png)
+
 
 
 
@@ -55,10 +59,33 @@
 ![image](https://user-images.githubusercontent.com/65528044/127528231-95e773dc-22e9-4316-beae-d9850779be36.png)
 
 
+<!-- How it works -->
+## How It Works
+
 ## API Endpoints and Docs
+
+* **Note:** Sample Data added for Users, Theaters, Branches, Screens, Shows, Seats, Movies !!! 
 
 Swagger Ui http://localhost:8081/swagger-ui.html
 
+### Booking end point & Sample request: 
+http://localhost:8081/reserve/book
+
+{
+  "theaterId": 1,
+  "branchId": 1,
+  "screenId": 1,
+  "seatIds": [
+    1,2,3
+  ],
+  "user": {
+    "id": 1,
+    "firstName": "Doni",
+    "lastName": "Singh",
+    "email": "doni@gmail.com",
+    "activeStatus": true
+  }
+}
 
 <!-- LICENSE -->
 ## License
