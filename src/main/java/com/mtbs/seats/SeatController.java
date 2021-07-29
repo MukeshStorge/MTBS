@@ -13,8 +13,8 @@ import com.mtbs.models.SeatAvailability;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/seats")
-@Tag(name = "Master - Seats")
+@RequestMapping("/seat")
+@Tag(name = "Master - Seat")
 public class SeatController {
 
     @Autowired

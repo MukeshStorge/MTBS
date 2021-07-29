@@ -38,7 +38,7 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 
-	@PostMapping("/book")
+	@PostMapping
 	public ResponseEntity<?> bookSeats(@RequestBody BookingModel bookingModel) {
 		try {
 			if (bookingModel != null && bookingModel.getSeatIds().size() > maxSeatsAllowed)

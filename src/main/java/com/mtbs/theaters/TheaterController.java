@@ -19,8 +19,8 @@ import com.mtbs.models.Theater;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/theaters")
-@Tag(name = "Master - Theaters")
+@RequestMapping("/theater")
+@Tag(name = "Master - Theater")
 public class TheaterController {
 
     @Autowired

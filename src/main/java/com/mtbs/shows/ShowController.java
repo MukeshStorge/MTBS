@@ -13,8 +13,8 @@ import com.mtbs.models.Show;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/shows")
-@Tag(name = "Master - Shows")
+@RequestMapping("/show")
+@Tag(name = "Master - Show")
 public class ShowController {
 
     @Autowired
