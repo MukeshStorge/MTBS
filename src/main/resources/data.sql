@@ -16,13 +16,13 @@ VALUES(1, 'Sathyam North', 1, '8927177662', 'Chennai', '600977') ON CONFLICT DO 
 
 INSERT INTO mtbs."user"
 (id, first_name, last_name, email, active_status)
-VALUES(1, 'Mukesh', 'Storge', 'mukesh@gmail.com', true) ON CONFLICT DO NOTHING;
+VALUES(1, 'Doni', 'Singh', 'doni@gmail.com', true) ON CONFLICT DO NOTHING;
 INSERT INTO mtbs."user"
 (id, first_name, last_name, email, active_status)
-VALUES(2, 'Ram', 'Kanna', 'ram@gmail.com', true) ON CONFLICT DO NOTHING;
+VALUES(2, 'Sachin', 'Tendulkar', 'sachin@gmail.com', true) ON CONFLICT DO NOTHING;
 INSERT INTO mtbs."user"
 (id, first_name, last_name, email, active_status)
-VALUES(3, 'Krishna', 'Dev', 'krishna@gmail.com', true) ON CONFLICT DO NOTHING;
+VALUES(3, 'Dravid', 'Dev', 'dravid@gmail.com', true) ON CONFLICT DO NOTHING;
 
 --Movies
 
