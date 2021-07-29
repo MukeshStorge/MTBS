@@ -1,4 +1,4 @@
-package com.moviebooking.schedulers;
+package com.mtbs.schedulers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
