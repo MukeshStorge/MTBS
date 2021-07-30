@@ -90,7 +90,7 @@ Below selected Redis ID is a combination of TheaterId+ShowId+ScreenId+SeatId+Tim
   "branchId": 1,
   "screenId": 1,
   "seatIds": [
-    1,2,3
+    1,2
   ],
   "user": {
     "id": 1,
@@ -104,8 +104,8 @@ Below selected Redis ID is a combination of TheaterId+ShowId+ScreenId+SeatId+Tim
 
 ## Points to Hightlight
 
-* It supports multiple Theaters, so we can use this as SAAS.
-* Used Union finding disjoint set for concurrency handling.
+* It supports multiple Theaters and Screens.
+* Used disjoint set for concurrent request prioritizing.
 * Configurable errors and logs. 
 
 
